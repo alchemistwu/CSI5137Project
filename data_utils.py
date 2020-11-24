@@ -84,8 +84,27 @@ def create_img_dataset(original_foler, train_img_folder, test_img_folder, csv_fi
         imsave(target_file, extrated_texture)
 
 if __name__ == '__main__':
-    training_folder = "/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train"
-    train_img_folder = "/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train_imgs"
-    test_img_folder = "/home/junzheng/course/CSI5137/csi5137Project/malware-classification/test_imgs"
-    csv_file = "/home/junzheng/course/CSI5137/csi5137Project/malware-classification/trainLabels.csv"
-    create_img_dataset(training_folder, train_img_folder, test_img_folder, csv_file)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-ori_dir', type=str,
+                        help='Directory for original training binary files',
+                        dest='ori_dir',
+                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train")
+
+    parser.add_argument('-ori_csv', type=str,
+                        help='Directory for original training csv file',
+                        dest='ori_csv',
+                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/trainLabels.csv")
+
+    parser.add_argument('-train_dir', type=str,
+                        help='Training directory',
+                        dest='train_dir',
+                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train_imgs")
+
+    parser.add_argument('-test_dir', type=str,
+                        help='Test directory',
+                        dest='test_dir',
+                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/test_imgs")
+
+    args = parser.parse_args()
+
+    create_img_dataset(args.ori_dir, args.train_dir, args.test_dir, args.ori_csv)

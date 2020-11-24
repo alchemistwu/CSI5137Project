@@ -10,20 +10,20 @@ class SaveBestModel(tf.keras.callbacks.Callback):
     """
     Callbacks for saving the model with lowest val_acc
     """
-    def __init__(self, filepath, model_name, monitor='val_loss'):
+    def __init__(self, filepath, model_name, monitor='val_acc'):
         super(SaveBestModel, self).__init__()
         self.model_name = model_name
         self.best_weights = None
         self.file_path = filepath
-        self.best = float('inf')
+        self.best = -float('inf')
         self.monitor = monitor
 
     def on_epoch_end(self, epoch, logs=None):
         current = logs.get(self.monitor)
         if not current:
-            current = float('inf')
+            current = -float('inf')
 
-        if np.less(current, self.best):
+        if np.less(self.best, current):
             self.best = current
             self.best_weights = self.model.get_weights()
 
