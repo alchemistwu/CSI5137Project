@@ -135,6 +135,10 @@ if __name__ == '__main__':
                         help='Training with single GPU support, default is multiple gpu',
                         dest='multi_gpu', const=False, default=True, nargs='?')
 
+    parser.add_argument('-pretrain', type=bool,
+                        help='Initialize the model with ImageNet pretrained weights',
+                        dest='pretrain', const=True, default=False, nargs='?')
+
     parser.add_argument('-train_dir', type=str,
                         help='Training directory',
                         dest='train_dir', default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train_imgs")
@@ -161,4 +165,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     train(args.train_dir, args.test_dir, multi_gpu=args.multi_gpu,
-          batch_size=args.batch_size, epoch=args.epoch, model_name=args.model)
+          batch_size=args.batch_size, epoch=args.epoch, model_name=args.model, pretrain=args.pretrain)

@@ -18,5 +18,7 @@
   * `googLeNet`: Inception-v3
   * `dense`: DenseNet121
   * `mobile`: MobileNet V2
+* Using multiple GPU by default, to use single gpu by specifying `-single_gpu`
+* To initialize the model by ImageNet pretrained weights, specify `-pretrain`
 * For more options:
 `python train.py -h`
