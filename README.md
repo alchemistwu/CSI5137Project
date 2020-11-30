@@ -4,7 +4,7 @@
 * `numpy==1.18.5`
 * `matplotlib==3.3.2`
 ## To run the experiment:
-* Download and extact dataset first: `https://www.kaggle.com/c/malware-classification/data`
+* Download and extract dataset first: `https://www.kaggle.com/c/malware-classification/data`
 * Convert binary files to jpg images:
 * `python data_utils.py -ori_dir [directory to training folder in downloaded dataset] 
 -ori_csv [directory to training csv in downloaded dataset] 
