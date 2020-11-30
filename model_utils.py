@@ -13,8 +13,8 @@ def model_factory(name, pretrain=None, target_size=256):
         weights = 'imagenet'
     model_dict = {
         'res': tf.keras.applications.ResNet50,
-        'vgg': tf.keras.applications.vgg16,
-        'googLeNet': tf.keras.applications.inception_v3,
+        'vgg': tf.keras.applications.vgg16.VGG16,
+        'googLeNet': tf.keras.applications.inception_v3.InceptionV3,
         'dense': tf.keras.applications.DenseNet121,
         'mobile': tf.keras.applications.MobileNetV2
     }
