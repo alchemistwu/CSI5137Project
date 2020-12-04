@@ -105,10 +105,13 @@ def get_tfDataset(training_directory, test_directory, verbose=False, batch_size=
         plt.show()
     return dataTrain, dataTest
 
-def train(train_directory, test_directory, model_name='res', epoch=100, batch_size=64, multi_gpu=True, pretrain=False):
+def train(train_directory, test_directory, model_name='res', epoch=100, batch_size=64, multi_gpu=True, pretrain=False,
+          row=False):
     if not os.path.exists('logs'):
         os.mkdir('logs')
-
+    if row:
+        train_directory += "row"
+        test_directory += "row"
     dataTrain, dataTest = get_tfDataset(train_directory, test_directory, batch_size=batch_size)
     dataTrain = dataTrain.cache()
     dataTrain = dataTrain.prefetch(tf.data.experimental.AUTOTUNE)
@@ -121,6 +124,8 @@ def train(train_directory, test_directory, model_name='res', epoch=100, batch_si
         strategy = tf.distribute.OneDeviceStrategy(device="/gpu:0")
     with strategy.scope():
         model = get_model(name=model_name, pretrain=True, target_size=256, n_class=9)
+        if row:
+            model_name += "_row"
         if pretrain:
             model_name += "_pretrain"
         model.fit(dataTrain, epochs=epoch, validation_data=dataTest, verbose=1, batch_size=batch_size,
@@ -138,6 +143,10 @@ if __name__ == '__main__':
     parser.add_argument('-pretrain', type=bool,
                         help='Initialize the model with ImageNet pretrained weights',
                         dest='pretrain', const=True, default=False, nargs='?')
+
+    parser.add_argument('-row', type=bool,
+                        help='use the row wise entropy comparison',
+                        dest='row', const=True, default=False, nargs='?')
 
     parser.add_argument('-train_dir', type=str,
                         help='Training directory',
@@ -163,6 +172,5 @@ if __name__ == '__main__':
                         dest='model',
                         default='res')
     args = parser.parse_args()
-
     train(args.train_dir, args.test_dir, multi_gpu=args.multi_gpu,
-          batch_size=args.batch_size, epoch=args.epoch, model_name=args.model, pretrain=args.pretrain)
+          batch_size=args.batch_size, epoch=args.epoch, model_name=args.model, pretrain=args.pretrain, row=args.row)
