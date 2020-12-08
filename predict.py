@@ -36,8 +36,10 @@ def predict(model, test_directory, batch_size):
     return groundTruth, predicted_labels
 
 
-def load_model(model_name='res', pretrain=False):
+def load_model(model_name='res', pretrain=False, row=False):
     model = get_model(name=model_name, pretrain=True, target_size=256, n_class=9)
+    if row:
+        model_name += "_row"
     if pretrain:
         model_name += "_pretrain"
     model_folder = os.path.join('model', model_name)
@@ -47,9 +49,11 @@ def load_model(model_name='res', pretrain=False):
     model.load_weights(best_model_weights)
     return model
 
-def analyse(y_true, y_pred, model_name, pretrain):
+def analyse(y_true, y_pred, model_name, pretrain, row):
     confu = confusion_matrix(y_true, y_pred)
     acc = accuracy_score(y_true, y_pred)
+    if row:
+        model_name += "_row"
     if pretrain:
         model_name += "_pretrain"
         
@@ -71,13 +75,15 @@ if __name__ == '__main__':
     parser.add_argument('-pretrain', type=bool,
                         help='Initialize the model with ImageNet pretrained weights',
                         dest='pretrain', const=True, default=False, nargs='?')
-
+    parser.add_argument('-row', type=bool,
+                        help='use the row wise entropy comparison',
+                        dest='row', const=True, default=False, nargs='?')
     parser.add_argument('-batch_size', type=int,
                         help='batch size',
                         dest='batch_size',
                         default=32)
     args = parser.parse_args()
 
-    model = load_model(model_name=args.model, pretrain=args.pretrain)
+    model = load_model(model_name=args.model, pretrain=args.pretrain, row=args.row)
     y_true, y_pred = predict(model, args.test_dir, args.batch_size)
-    analyse(y_true, y_pred, args.model, args.pretrain)
+    analyse(y_true, y_pred, args.model, args.pretrain, args.row)
