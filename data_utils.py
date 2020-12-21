@@ -104,22 +104,22 @@ if __name__ == '__main__':
     parser.add_argument('-ori_dir', type=str,
                         help='Directory for original training binary files',
                         dest='ori_dir',
-                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train")
+                        default="../data/train")
 
     parser.add_argument('-ori_csv', type=str,
                         help='Directory for original training csv file',
                         dest='ori_csv',
-                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/trainLabels.csv")
+                        default="../data/trainLabels.csv")
 
     parser.add_argument('-train_dir', type=str,
                         help='Training directory',
                         dest='train_dir',
-                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train_imgs")
+                        default="../data/train_imgs")
 
     parser.add_argument('-test_dir', type=str,
                         help='Test directory',
                         dest='test_dir',
-                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/test_imgs")
+                        default="../data/test_imgs")
 
     parser.add_argument('-window', type=bool,
                         help='if true, use sliding window to extract texture, otherwise select the top 256 rows.',
