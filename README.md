@@ -15,8 +15,8 @@
 -ori_csv [directory to training csv in downloaded dataset] 
 -train_dir [for saving training data] -test_dir [for saving test data] -window`
   
-* Note that: Use one single directory for all the experiments. Since a postfix "row" will be automatically added to the 
-  directory you put if the outstanding row based method is selected.
+* Note that: The outstanding row based method and the continous sliding window method should share same directories. 
+  Since a postfix "row" will be automatically added to the directory you put if the outstanding row based method is selected.
   
 ### Training
 * To train a DenseNet model with outstanding row(similarly you do not need to change the directories for training
