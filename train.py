@@ -150,12 +150,12 @@ if __name__ == '__main__':
 
     parser.add_argument('-train_dir', type=str,
                         help='Training directory',
-                        dest='train_dir', default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/train_imgs")
+                        dest='train_dir', default="../data/train_imgs")
 
     parser.add_argument('-test_dir', type=str,
                         help='Test directory',
                         dest='test_dir',
-                        default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/test_imgs")
+                        default="../data/test_imgs")
 
     parser.add_argument('-batch_size', type=int,
                         help='batch size',

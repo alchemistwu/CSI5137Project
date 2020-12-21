@@ -96,29 +96,29 @@ def statistically_test(result_csv_file, type="part"):
 
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('-test_dir', type=str,
-    #                     help='Test directory',
-    #                     dest='test_dir',
-    #                     default="/home/junzheng/course/CSI5137/csi5137Project/malware-classification/test_imgs")
-    # parser.add_argument('-model', type=str,
-    #                     help=''' Models to be used, options are: 'res','vgg','googLeNet','dense','mobile', defaut is 'res' ''',
-    #                     dest='model',
-    #                     default='res')
-    # parser.add_argument('-pretrain', type=bool,
-    #                     help='Initialize the model with ImageNet pretrained weights',
-    #                     dest='pretrain', const=True, default=False, nargs='?')
-    # parser.add_argument('-row', type=bool,
-    #                     help='use the row wise entropy comparison',
-    #                     dest='row', const=True, default=False, nargs='?')
-    # parser.add_argument('-batch_size', type=int,
-    #                     help='batch size',
-    #                     dest='batch_size',
-    #                     default=32)
-    #
-    # args = parser.parse_args()
-    #
-    # model = load_model(model_name=args.model, pretrain=args.pretrain, row=args.row)
-    # y_true, y_pred = predict(model, args.test_dir, args.batch_size)
-    # analyse(y_true, y_pred, args.model, args.pretrain, args.row)
-    statistically_test("logs/result.csv", type="init")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-test_dir', type=str,
+                        help='Test directory',
+                        dest='test_dir',
+                        default="../data/test_imgs")
+    parser.add_argument('-model', type=str,
+                        help=''' Models to be used, options are: 'res','vgg','googLeNet','dense','mobile', defaut is 'res' ''',
+                        dest='model',
+                        default='res')
+    parser.add_argument('-pretrain', type=bool,
+                        help='Initialize the model with ImageNet pretrained weights',
+                        dest='pretrain', const=True, default=False, nargs='?')
+    parser.add_argument('-row', type=bool,
+                        help='use the row wise entropy comparison',
+                        dest='row', const=True, default=False, nargs='?')
+    parser.add_argument('-batch_size', type=int,
+                        help='batch size',
+                        dest='batch_size',
+                        default=32)
+
+    args = parser.parse_args()
+
+    model = load_model(model_name=args.model, pretrain=args.pretrain, row=args.row)
+    y_true, y_pred = predict(model, args.test_dir, args.batch_size)
+    analyse(y_true, y_pred, args.model, args.pretrain, args.row)
+    # statistically_test("logs/result.csv", type="init")
