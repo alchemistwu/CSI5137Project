@@ -3,7 +3,15 @@
 * `tensorflow-gpu==2.3`
 * `numpy==1.18.5`
 * `matplotlib==3.3.2`
-## To run the experiment:
+
+## To rapidly replicate the work:
+### Download trained weights:
+* [Download the trained model](https://drive.google.com/file/d/1F0-pGaj47s0vCFJMCIvW-A0J4sSsR2Bh/view?usp=sharing)
+* Unzip it and replace the original `model` folder if there is one.
+### Download the processed data
+* [Download the processed data](https://drive.google.com/file/d/1UUHAg1yqaca2X4MruYS2aIBUjyl9Ooln/view?usp=sharing)
+* Unzip it and replace the original `data` folder if ther is one.
+## To run the experiment from scratch:
 ### Preparing the data:
 * Download and extract dataset first: `https://www.kaggle.com/c/malware-classification/data`
 * Convert binary files to jpg images:
